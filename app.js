@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   // prettier-ignore
-  var products = [
+  let products = [
     { id: 1, brand: "Zenit", model: "TTL", price: 50, img: "img/1.webp" },
     { id: 2, brand: "Agfa", model: "Optima", price: 150, img: "img/2.webp" },
     { id: 3, brand: "Konica", model: "Autoreflex TC", price: 120, img: "img/3.webp" },
@@ -14,11 +14,11 @@ document.addEventListener("DOMContentLoaded", function () {
     { id: 11, brand: "Hasselblad", model: "500C/M", price: 2500, img: "img/11.webp" },
     { id: 12, brand: "Yashica", model: "Electro 35", price: 120, img: "img/12.webp" }
   ];
-  var productList = document.getElementById("productList");
+  let productList = document.getElementById("productList");
 
-  var productHtml = "";
+  let productHtml = "";
   for (var i = 0; i < products.length; i++) {
-    var product = products[i];
+    let product = products[i];
     productHtml += `
       <div class="pro">
         <img src="${product.img}" alt="${product.model}" />
@@ -35,16 +35,16 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   productList.innerHTML = productHtml;
 
-  var productDetails = document.getElementById("productDetails");
-  var overlay = document.getElementById("overlay");
-  var modal = document.getElementById("modal");
+  let productDetails = document.getElementById("productDetails");
+  let overlay = document.getElementById("overlay");
+  let modal = document.getElementById("modal");
 
   productList.addEventListener("click", function (event) {
-    var target = event.target.closest(".add-to-cart");
+    let target = event.target.closest(".add-to-cart");
     if (target) {
       event.preventDefault();
-      var productId = target.getAttribute("data-id");
-      var product = products.find(function (p) {
+      let productId = target.getAttribute("data-id");
+      let product = products.find(function (p) {
         return p.id == productId;
       });
       localStorage.setItem("selectedProduct", JSON.stringify(product));
@@ -52,14 +52,9 @@ document.addEventListener("DOMContentLoaded", function () {
       productDetails.innerHTML = `
         <p><strong>${product.brand} ${product.model}</strong></p>
         <p>Price: $${product.price}</p>
-        <img src="${product.img}" alt="${product.model}" style="max-width: 100%; height: auto;" />
+        <img src="${product.img}" alt="${product.model}" class=productImg />
         <p>Total: $<span id="totalAmount">${product.price}</span></p>
       `;
-
-      var checkboxes = document.querySelectorAll("input[name='accessories']");
-      checkboxes.forEach(function (checkbox) {
-        checkbox.checked = false;
-      });
 
       overlay.style.display = "block";
       modal.style.display = "block";
@@ -88,12 +83,12 @@ document.addEventListener("DOMContentLoaded", function () {
   document
     .getElementById("confirmPurchaseBtn")
     .addEventListener("click", function () {
-      var form = document.getElementById("CameraForm");
-      var ownerName = form.querySelector("#ownerName").value.trim();
-      var deliveryDate = form.querySelector("#deliveryDate").value;
-      var errorMessage = document.getElementById("errorMessage");
+      let form = document.getElementById("CameraForm");
+      let ownerName = form.querySelector("#ownerName").value.trim();
+      let deliveryDate = form.querySelector("#deliveryDate").value;
+      let errorMessage = document.getElementById("errorMessage");
 
-      var errorMessages = [];
+      let errorMessages = [];
       if (ownerName.split(" ").length < 2) {
         errorMessages.push("Please enter your full name");
       }
@@ -133,7 +128,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <p>Price: $${product.price}</p>
           `;
     totalAmountElement.textContent = totalAmount;
-    localStorage.clear(); // Clear all stored data after displaying
+    localStorage.clear();
   } else {
     productInfo.innerHTML = "<p>No product information available.</p>";
   }
