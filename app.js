@@ -60,8 +60,8 @@ document.addEventListener("DOMContentLoaded", function () {
       modal.style.display = "block";
 
       var checkboxes = document.querySelectorAll("input[name='accessories']");
-      for (var j = 0; j < checkboxes.length; j++) {
-        checkboxes[j].addEventListener("change", function () {
+      for (var i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].addEventListener("change", function () {
           updateTotal(product.price);
         });
       }
@@ -73,8 +73,8 @@ document.addEventListener("DOMContentLoaded", function () {
     var checkedCheckboxes = document.querySelectorAll(
       "input[name='accessories']:checked"
     );
-    for (var k = 0; k < checkedCheckboxes.length; k++) {
-      var checkbox = checkedCheckboxes[k];
+    for (var i = 0; i < checkedCheckboxes.length; i++) {
+      var checkbox = checkedCheckboxes[i];
       total += parseFloat(checkbox.getAttribute("data-price"));
     }
     document.getElementById("totalAmount").textContent = total.toFixed(2);
